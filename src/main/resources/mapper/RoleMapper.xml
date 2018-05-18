@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lhl.mapper.RoleMapper">
+    <cache type="com.lhl.utils.Redis.RedisCache" />
+    <resultMap id="BaseResultMap" type="com.lhl.bean.Role" >
+        <id column="sid" property="sid" jdbcType="INTEGER" />
+        <result column="rname" property="rname" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        sid, rname
+    </sql>
+    <select id="getRoleInfo" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        *
+        from role
+        where sid = #{sId}
+    </select>
+    <insert id="insert" parameterType="com.lhl.bean.Role" >
+        insert into role (sid, rname)
+        values (#{sId}, #{rName})
+  </insert>
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhl.mapper.PhotoMapper">
+    <resultMap id="BaseResultMap" type="com.lhl.bean.Photo" >
+        <id column="p_id" property="pId" jdbcType="INTEGER" />
+        <result column="p_type" property="pType" jdbcType="VARCHAR" />
+        <result column="p_city" property="pCity" jdbcType="VARCHAR" />
+        <result column="p_b_id" property="pBId" jdbcType="INTEGER" />
+        <result column="p_household" property="pHousehold" jdbcType="VARCHAR" />
+        <result column="p_unit" property="pUnit" jdbcType="VARCHAR" />
+        <result column="p_floor" property="pFloor" jdbcType="VARCHAR" />
+        <result column="p_door_model" property="pDoorModel" jdbcType="VARCHAR" />
+        <result column="p_bedroom" property="pBedroom" jdbcType="VARCHAR" />
+        <result column="p_wall" property="pWall" jdbcType="VARCHAR" />
+        <result column="p_note1" property="pNote1" jdbcType="VARCHAR" />
+        <result column="p_note2" property="pNote2" jdbcType="VARCHAR" />
+        <result column="p_note3" property="pNote3" jdbcType="VARCHAR" />
+        <result column="p_points" property="pPoints" jdbcType="VARCHAR" />
+        <result column="p_measurement" property="pMeasurement" jdbcType="VARCHAR" />
+        <result column="p_lable" property="pLable" jdbcType="VARCHAR" />
+        <result column="p_photo" property="pPhoto" jdbcType="VARCHAR" />
+        <result column="p_address" property="pAddress" jdbcType="VARCHAR" />
+        <result column="p_time" property="pTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select *from photo where p_id = #{ID}
+    </select>
+
+    <update id="edit" parameterType="com.lhl.bean.Photo">
+        update photo
+        <set>
+            <if test="pType != null" >
+                p_type = #{pType},
+            </if>
+            <if test="pCity != null" >
+                p_city = #{pCity},
+            </if>
+            <if test="pBId != null" >
+                p_b_id = #{pBId},
+            </if>
+            <if test="pHousehold != null" >
+                p_household = #{pHousehold},
+            </if>
+            <if test="pUnit != null" >
+                p_unit = #{pUnit},
+            </if>
+            <if test="pFloor != null" >
+                p_floor = #{pFloor},
+            </if>
+            <if test="pDoorModel != null" >
+                p_door_model = #{pDoorModel},
+            </if>
+            <if test="pBedroom != null" >
+                p_bedroom = #{pBedroom},
+            </if>
+            <if test="pWall != null" >
+                p_wall = #{pWall},
+            </if>
+            <if test="pNote1 != null" >
+                p_note1 = #{pNote1},
+            </if>
+            <if test="pNote2 != null" >
+                p_note2 = #{pNote2},
+            </if>
+            <if test="pNote3 != null" >
+                p_note3 = #{pNote3},
+            </if>
+            <if test="pPoints != null" >
+                p_points = #{pPoints},
+            </if>
+            <if test="pMeasurement != null" >
+                p_measurement = #{pMeasurement},
+            </if>
+            <if test="pLable != null" >
+                p_lable = #{pLable},
+            </if>
+            <if test="pPhoto != null" >
+                p_photo = #{pPhoto},
+            </if>
+            <if test="pAddress != null" >
+                p_address = #{pAddress},
+            </if>
+            <if test="pTime != null" >
+                p_time = #{pTime},
+            </if>
+        </set>
+        where p_id = #{pId}
+    </update>
+
+    <delete id="batchDelete" parameterType="java.lang.Integer">
+        delete from photo where p_id in
+        <foreach collection="array" item="ids" open="("  close=")" separator=",">
+            #{ids}
+        </foreach>
+    </delete>
+</mapper>
